@@ -4,7 +4,6 @@ import (
 	"encoding/json"
 	"net/http"
 
-	"github.com/Searching96/my-go-api.git/api"
 	"github.com/Searching96/my-go-api/api"
 	"github.com/Searching96/my-go-api/internal/tools"
 	"github.com/gorilla/schema"
@@ -26,14 +25,14 @@ func GetCoinBalance(w http.ResponseWriter, r *http.Request) {
 	var database *tools.DatabaseInterface
 	database, err = tools.NewDatabase()
 	if err != nil {
-		api.InternalErrorHanlder(w)
+		api.InternalErrorHandler(w)
 		return
 	}
 
 	var tokenDetails = (*database).GetUserCoins(params.Username)
 	if tokenDetails == nil {
 		log.Error(err)
-		api.InternalErrorHanlder(w)
+		api.InternalErrorHandler(w)
 		return
 	}
 
@@ -46,7 +45,7 @@ func GetCoinBalance(w http.ResponseWriter, r *http.Request) {
 	err = json.NewEncoder(w).Encode(response)
 	if err != nil {
 		log.Error(err)
-		api.InternalErrorHanlder(w)
+		api.InternalErrorHandler(w)
 		return
 	}
 }
