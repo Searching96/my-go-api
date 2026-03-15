@@ -13,7 +13,7 @@ var UnauthorizedError = errors.New("Invalid user name or token.")
 
 func Authorization(next http.Handler) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		var username string = r.URL.Query().Get("username")
+		var username = r.URL.Query().Get("username")
 		var token = r.Header.Get("Authorization")
 		var err error
 
